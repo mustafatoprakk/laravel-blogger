@@ -75,7 +75,7 @@
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="logout">Log out</a></li>
+                                        <li><a class="dropdown-item" href="/../logout">Log out</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -93,27 +93,48 @@
         <!-- end header section -->
     </div>
 
-    
-    
+
+
     <div class="container" style="margin-top: 10%; margin-bottom: 10%">
         <div class="row">
             <div class="col-md-8 offset-md-2">
+                @if (session()->has('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session()->get('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="card shadow p-3 mb-5 bg-body rounded">
                     <div class="card-body">
-                        <form action="" method="post">
+                        <form action="{{ route('profile.update', $profile->id) }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <div class="mb-5">
-                                <img src="/../frontend/images/b1.jpg" width="200px" height="200px" class="rounded-circle mx-auto d-block" alt="...">
+                                <img src="/../frontend/images/b1.jpg" width="200px" height="200px"
+                                    class="rounded-circle mx-auto d-block" alt="...">
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Ahmet" value="{{ $profile->name }}">
+                                <input type="text" class="form-control" id="name" name="name"
+                                    placeholder="Ahmet" value="{{ $profile->name }}">
                                 <label for="name">Name</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" value="{{ $profile->email }}">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="name@example.com" value="{{ $profile->email }}">
                                 <label for="email">Email address</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password">
                                 <label for="password">Password</label>
                             </div>
                             <div class="mb-4">

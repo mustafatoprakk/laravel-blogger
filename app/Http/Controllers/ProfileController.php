@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\ProfileResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -71,9 +72,23 @@ class ProfileController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request, User $user)
+    public function update(UpdateProfileRequest $request)
     {
-        //
+        $user = User::findOrFail(Auth::user()->id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+        $user->update();
+
+        //$user->update([
+        //    "name" => $request->name,
+        //    "email" => $request->email,
+        //    "password" => Hash::make($request->password)
+        //]);
+        return redirect()->back()->with("message", "Profile successfully updated");
     }
 
     /**

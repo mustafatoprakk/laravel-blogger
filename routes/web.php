@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,7 @@ Route::get('/blog', function () {
 });
 
 Auth::routes();
+
+Route::middleware("auth")->prefix("admin")->group(function () {
+    Route::resource("/profile", ProfileController::class);
+});

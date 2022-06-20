@@ -71,7 +71,8 @@
                                         Profile
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('profile.show', Auth::user()->id) }}">Profile</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
@@ -118,9 +119,10 @@
                                 Eius, dolor? Vel velit sed doloremque
                             </h5>
                             <p>
+                                <code>
                                 Incidunt magni explicabo ullam ipsa quo consequuntur eveniet illo? Aspernatur nam
                                 dolorem a neque? Esse eaque dolores hic debitis cupiditate, ad beatae voluptatem numquam
-                                dignissimos ab porro
+                                dignissimos ab porro</code>
                             </p>
                             <a href="">
                                 Read More

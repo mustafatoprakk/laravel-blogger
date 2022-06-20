@@ -34,7 +34,7 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="/../">
                         <span>
                             Bostorek
                         </span>
@@ -49,7 +49,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link pl-lg-0" href="/">Home </a>
+                                <a class="nav-link pl-lg-0" href="/../">Home </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.html"> About</a>
@@ -58,7 +58,7 @@
                                 <a class="nav-link" href="categories.html">Categories</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="blog"> Blog <span class="sr-only">(current)</span> </a>
+                                <a class="nav-link" href="/../blog"> Blog <span class="sr-only">(current)</span> </a>
                             </li>
                             @if (!Auth::user())
                                 <li class="nav-item">

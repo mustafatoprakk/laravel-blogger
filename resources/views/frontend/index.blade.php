@@ -34,7 +34,7 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="frontend/index.html">
+                    <a class="navbar-brand" href="/">
                         <span>
                             Blogger
                         </span>
@@ -49,7 +49,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link pl-lg-0" href="index.html">Home <span
+                                <a class="nav-link pl-lg-0" href="/">Home <span
                                         class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">

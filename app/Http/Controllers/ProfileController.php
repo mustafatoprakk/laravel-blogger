@@ -8,6 +8,7 @@ use App\Http\Resources\ProfileResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -81,13 +82,17 @@ class ProfileController extends Controller
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
-        $user->update();
 
-        //$user->update([
-        //    "name" => $request->name,
-        //    "email" => $request->email,
-        //    "password" => Hash::make($request->password)
-        //]);
+        if ($request->hasFile("image")) {
+            if ($request->old_image) {
+                Storage::delete($request->old_image);
+            }
+            $path = $request->file("image")->store("public/images");
+            $user->image = $path;
+        }
+
+
+        $user->update();
         return redirect()->back()->with("message", "Profile successfully updated");
     }
 

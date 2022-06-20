@@ -22,6 +22,7 @@ class ProfileResource extends JsonResource
                 "email" => $this->email,
                 "password" => $this->password,
                 "is_admin" => $this->is_admin,
+                "image" => $this->image
             ],
         ];
     }

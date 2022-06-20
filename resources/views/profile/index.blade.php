@@ -115,11 +115,14 @@
                 @endif
                 <div class="card shadow p-3 mb-5 bg-body rounded">
                     <div class="card-body">
-                        <form action="{{ route('profile.update', $profile->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('profile.update', $profile->id) }}" method="post"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" class="form-control form-control-lg bg-dark text-light"
+                                name="old_image" id="old_image" value="{{ $profile->image }}">
                             <div class="mb-5">
-                                <img src="/../frontend/images/b1.jpg" width="200px" height="200px"
+                                <img src="{{ Storage::url($profile->image) }}" width="200px" height="200px"
                                     class="rounded-circle mx-auto d-block" alt="...">
                             </div>
                             <div class="form-floating mb-4">

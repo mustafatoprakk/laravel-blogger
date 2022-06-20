@@ -25,7 +25,7 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             "name" => ["required", "min:3", "max:250"],
-            "email" => ["required"],
+            "email" => ["required", "email"],
             "password" => ["nullable", "min:4", "max:20"],
             "image" => ["nullable"]
         ];

@@ -8,7 +8,7 @@
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Site Metas -->
-    <link rel="icon" href="frontend/images/favicon.png" type="image/gif" />
+    <link rel="icon" href="/../frontend/images/favicon.png" type="image/gif" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -18,12 +18,12 @@
     <!-- bootstrap core css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- font awesome style -->
-    <link href="frontend/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/../frontend/css/font-awesome.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="frontend/css/style.css" rel="stylesheet" />
+    <link href="/../frontend/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
-    <link href="frontend/css/responsive.css" rel="stylesheet" />
+    <link href="/../frontend/css/responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -34,7 +34,7 @@
         <header class="header_section">
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand" href="/../">
                         <span>
                             Bostorek
                         </span>
@@ -49,7 +49,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link pl-lg-0" href="/">Home </a>
+                                <a class="nav-link pl-lg-0" href="/../">Home </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about.html"> About</a>
@@ -58,7 +58,7 @@
                                 <a class="nav-link" href="categories.html">Categories</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="blog"> Blog <span class="sr-only">(current)</span> </a>
+                                <a class="nav-link" href="/../blog"> Blog <span class="sr-only">(current)</span> </a>
                             </li>
                             @if (!Auth::user())
                                 <li class="nav-item">
@@ -73,11 +73,12 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item"
                                                 href="{{ route('profile.show', Auth::user()->id) }}">Profile</a></li>
-                                        <li><a class="dropdown-item" href="">Create Blog</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('blog.create') }}">Create Blog</a>
+                                        </li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="logout">Log out</a></li>
+                                        <li><a class="dropdown-item" href="/../logout">Log out</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -95,73 +96,64 @@
         <!-- end header section -->
     </div>
 
-    <!-- blog section -->
 
-    <section class="blog_section layout_padding">
-        <div class="container">
-            <div class="heading_container heading_center">
-                <h2>
-                    From Our Blog
-                </h2>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="frontend/images/b1.jpg" alt="">
-                            <h4 class="blog_date">
-                                <span>
-                                    19 January 2021
-                                </span>
-                            </h4>
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Eius, dolor? Vel velit sed doloremque
-                            </h5>
-                            <p>
-                                <code>
-                                    Incidunt magni explicabo ullam ipsa quo consequuntur eveniet illo? Aspernatur nam
-                                    dolorem a neque? Esse eaque dolores hic debitis cupiditate, ad beatae voluptatem
-                                    numquam
-                                    dignissimos ab porro</code>
-                            </p>
-                            <a href="">
-                                Read More
-                            </a>
-                        </div>
+
+    <div class="container" style="margin-top: 10%; margin-bottom: 10%">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                @if (session()->has('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session()->get('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="frontend/images/b2.jpg" alt="">
-                            <h4 class="blog_date">
-                                <span>
-                                    19 January 2021
-                                </span>
-                            </h4>
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Minus aliquid alias porro iure fuga
-                            </h5>
-                            <p>
-                                Officiis veritatis id illo eligendi repellat facilis animi adipisci praesentium. Tempore
-                                ab provident porro illo ex obcaecati deleniti enim sequi voluptas at. Harum veniam eos
-                                nisi distinctio! Porro, reiciendis eius.
-                            </p>
-                            <a href="">
-                                Read More
-                            </a>
-                        </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="card shadow p-3 mb-5 bg-body rounded">
+                    <div class="card-body">
+                        <form action="{{ route('blog.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            @method('POST')
+                            <div class="pb-4">
+                                <p class="text-center fs-4 fw-bold">Create a Blog</p>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <input type="text" class="form-control" id="title" name="title"
+                                    placeholder="JavaScript" value="">
+                                <label for="title">Title</label>
+                            </div>
+                            <div class="form-floating mb-4">
+                                <textarea class="form-control" placeholder="Leave a description" id="description" name="description"
+                                    style="height: 100px"></textarea>
+                                <label for="description">Description</label>
+                            </div>
+                            <code>
+                                <div class="form-floating mb-4">
+                                    <textarea class="form-control" placeholder="Leave a Code" id="code" name="code" style="height: 250px"></textarea>
+                                    <label for="code">Code</label>
+                                </div>
+                            </code>
+                            <div class="mb-4">
+                                <label for="formFile" class="form-label">Upload Image</label>
+                                <input class="form-control" type="file" id="image" name="image">
+                            </div>
+                            <div class="mb-2">
+                                <button type="submit" class="btn btn-primary">Create Blog</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- end blog section -->
 
     <!-- info section -->
 
@@ -258,11 +250,11 @@
     <!-- footer section -->
 
     <!-- jQery -->
-    <script src="frontend/js/jquery-3.4.1.min.js"></script>
+    <script src="/../frontend/js/jquery-3.4.1.min.js"></script>
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- custom js -->
-    <script src="frontend/js/custom.js"></script>
+    <script src="/../frontend/js/custom.js"></script>
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
     </script>

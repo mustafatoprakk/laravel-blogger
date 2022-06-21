@@ -58,7 +58,8 @@
                                 <a class="nav-link" href="categories.html">Categories</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="/../blog"> Blog <span class="sr-only">(current)</span> </a>
+                                <a class="nav-link" href="{{ route('blog.index') }}"> Blog <span
+                                        class="sr-only">(current)</span> </a>
                             </li>
                             @if (!Auth::user())
                                 <li class="nav-item">
@@ -71,7 +72,10 @@
                                         Profile
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('profile.show', Auth::user()->id) }}">Profile</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('blog.create') }}">Create Blog</a>
+                                        </li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>

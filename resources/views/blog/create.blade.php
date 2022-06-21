@@ -58,7 +58,7 @@
                                 <a class="nav-link" href="categories.html">Categories</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="/../blog"> Blog <span class="sr-only">(current)</span> </a>
+                                <a class="nav-link" href="{{ route('blog.index') }}"> Blog <span class="sr-only">(current)</span> </a>
                             </li>
                             @if (!Auth::user())
                                 <li class="nav-item">

@@ -59,7 +59,7 @@
                                 <a class="nav-link" href="categories.html">Categories</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="blog"> Blog </a>
+                                <a class="nav-link" href="{{ route('blog.index') }}"> Blog </a>
                             </li>
                             @if (!Auth::user())
                                 <li class="nav-item">

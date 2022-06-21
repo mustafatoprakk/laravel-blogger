@@ -8,7 +8,7 @@
     <!-- Mobile Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Site Metas -->
-    <link rel="icon" href="frontend/images/favicon.png" type="image/gif" />
+    <link rel="icon" href="../frontend/images/favicon.png" type="image/gif" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -18,12 +18,12 @@
     <!-- bootstrap core css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- font awesome style -->
-    <link href="frontend/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../frontend/css/font-awesome.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="frontend/css/style.css" rel="stylesheet" />
+    <link href="../frontend/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
-    <link href="frontend/css/responsive.css" rel="stylesheet" />
+    <link href="../frontend/css/responsive.css" rel="stylesheet" />
 
 </head>
 
@@ -58,7 +58,8 @@
                                 <a class="nav-link" href="categories.html">Categories</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="blog"> Blog <span class="sr-only">(current)</span> </a>
+                                <a class="nav-link" href="{{ route('blog.index') }}"> Blog <span
+                                        class="sr-only">(current)</span> </a>
                             </li>
                             @if (!Auth::user())
                                 <li class="nav-item">
@@ -73,7 +74,8 @@
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item"
                                                 href="{{ route('profile.show', Auth::user()->id) }}">Profile</a></li>
-                                        <li><a class="dropdown-item" href="">Create Blog</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('blog.create') }}">Create Blog</a>
+                                        </li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
@@ -105,58 +107,33 @@
                 </h2>
             </div>
             <div class="row">
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="frontend/images/b1.jpg" alt="">
-                            <h4 class="blog_date">
-                                <span>
-                                    19 January 2021
-                                </span>
-                            </h4>
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Eius, dolor? Vel velit sed doloremque
-                            </h5>
-                            <p>
-                                <code>
-                                    Incidunt magni explicabo ullam ipsa quo consequuntur eveniet illo? Aspernatur nam
-                                    dolorem a neque? Esse eaque dolores hic debitis cupiditate, ad beatae voluptatem
-                                    numquam
-                                    dignissimos ab porro</code>
-                            </p>
-                            <a href="">
-                                Read More
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="box">
-                        <div class="img-box">
-                            <img src="frontend/images/b2.jpg" alt="">
-                            <h4 class="blog_date">
-                                <span>
-                                    19 January 2021
-                                </span>
-                            </h4>
-                        </div>
-                        <div class="detail-box">
-                            <h5>
-                                Minus aliquid alias porro iure fuga
-                            </h5>
-                            <p>
-                                Officiis veritatis id illo eligendi repellat facilis animi adipisci praesentium. Tempore
-                                ab provident porro illo ex obcaecati deleniti enim sequi voluptas at. Harum veniam eos
-                                nisi distinctio! Porro, reiciendis eius.
-                            </p>
-                            <a href="">
-                                Read More
-                            </a>
+                @foreach ($blogs as $blog)
+                    <div class="col-md-6">
+                        <div class="box">
+                            <div class="img-box">
+                                <img src="{{ '../image/' . $blog->image }}" alt="">
+                                <h4 class="blog_date">
+                                    <span>
+                                        {{ date('d-M-Y', strtotime($blog->created_at)) }}
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    {{ $blog->title }}
+                                </h5>
+                                <p>
+                                    <code>
+                                        {{ $blog->code }}
+                                    </code>
+                                </p>
+                                <a href="">
+                                    Read More
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -258,11 +235,11 @@
     <!-- footer section -->
 
     <!-- jQery -->
-    <script src="frontend/js/jquery-3.4.1.min.js"></script>
+    <script src="../frontend/js/jquery-3.4.1.min.js"></script>
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- custom js -->
-    <script src="frontend/js/custom.js"></script>
+    <script src="../frontend/js/custom.js"></script>
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
     </script>
